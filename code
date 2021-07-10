@@ -1,0 +1,37 @@
+#importing libraries
+import pandas as pd
+import numpy as np
+
+
+#This is DataSet
+doct = {
+   "Name": ['Azra', 'Kamini', 'Goyal', 'Zabee', 'Roy', 'Udupi', 'Sameer', 'Torah', 'Cadilla', 'Ritz'],
+   "Tax": [1250, 3200, 1200, 1800, 4200, 3200, 2300, 2310, 1200, 3200],
+   "Salary": [12500, 32000, 12000, 18000, 42000, 32000, 23000, 23100, 12000, 32000] 
+}
+
+
+#Converting the DataSet(Dictionary) to DataFrame
+df = pd.DataFrame(doct)
+
+
+#Converting columns of DataFrame to a numpy array 
+rawarray1 = df['Tax']
+array1 = np.array(rawarray1, dtype='int64')
+
+rawarray2 = df['Salary']
+array2 = np.array(rawarray2, dtype='int64')
+
+
+#Dropping the columns which are of string format
+df.drop(['Tax','Salary'],axis=1)
+
+
+#Adding converted integer columns back in dataframe
+
+df['Tax'] = array1
+df['Salary'] = array2
+
+df['NetIncome'] = df['Salary'] - df['Tax']
+
+print(df.to_string())
